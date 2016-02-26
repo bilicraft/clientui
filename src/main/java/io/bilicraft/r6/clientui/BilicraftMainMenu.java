@@ -20,7 +20,6 @@ import org.lwjgl.util.glu.Project;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.sun.xml.internal.org.jvnet.fastinfoset.sax.helpers.EncodingAlgorithmAttributesImpl;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.GuiModList;
@@ -163,8 +162,8 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 			password.setText("Password");
 		}
 		BilicraftUI.email = this.email.getText();
-		BilicraftUI.password = this.password.getText();
-
+		//BilicraftUI.password = this.password.getText();
+		BilicraftUI.password = this.password.getPassword();
 		++this.panoramaTimer;
 	}
 
@@ -246,16 +245,15 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 	}
 
 	private GuiTextField email;
-	private GuiTextField password;
-
+	//private GuiTextField password;
+	private BilicraftPasswordTextField password;
 	private void addTextField(int i) {
 		Keyboard.enableRepeatEvents(true);
 		email = new GuiTextField(this.fontRendererObj, this.width / 2 - 98, i, 95, 15);
 		email.setMaxStringLength(128);
 		email.setText("E-Mail");
-		password = new GuiTextField(this.fontRendererObj, this.width / 2 + 4, i, 95, 15);
-		password.setMaxStringLength(128);
-		password.setText("Password");
+		password = new BilicraftPasswordTextField(this.fontRendererObj, this.width / 2 + 4, i, 95, 15,"Password");
+		//password.setText("Password");
 
 	}
 
@@ -337,7 +335,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 		}
 		if (p_146284_1_.id == 22) {
 			BilicraftUI.email = this.email.getText();
-			BilicraftUI.password = this.password.getText();
+			BilicraftUI.password = this.password.getPassword();
 			if (BilicraftUI.password.length() < 8 || BilicraftUI.password.equals("Password")) {
 				error = true;
 				this.password.setFocused(true);
@@ -352,11 +350,10 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 
 			FMLClientHandler.instance().setupServerList();
 			FMLClientHandler.instance().connectToServer(this, new ServerData("", "mc.bilicraft.io"));
-		}	
-		
-		if(p_146284_1_.id ==23)
-		{
-			//TODO 完成功能
+		}
+
+		if (p_146284_1_.id == 23) {
+			// TODO 完成功能
 		}
 
 		if (p_146284_1_.id == 14) {
@@ -559,7 +556,9 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 		tessellator.addVertexWithUV(0.0D, 0.0D, (double) this.zLevel, (double) (0.5F + f2), (double) (0.5F + f3));
 		tessellator.draw();
 	}
+
 	private int tempTimer = -1;
+
 	/**
 	 * Draws the screen and all the components in it.
 	 */
@@ -613,25 +612,25 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 						this.height - (10 + i * (this.fontRendererObj.FONT_HEIGHT + 1)), 16777215);
 			}
 		}
-		
+
 		String s1 = "Copyright Mojang AB. Do not distribute!";
 		// System.out.println("Pre1->2:"+tempTimer);
 
 		this.drawString(this.fontRendererObj, s1, this.width - this.fontRendererObj.getStringWidth(s1) - 2,
 				this.height - 10, -1);
-		if(!error)
-		{
+		if (!error) {
 			tempTimer = -1;
 		}
 		if (error) {
 			String errorPassword = "§r§cPassword Length must >= 8";
-			if (tempTimer == -1){
+			if (tempTimer == -1) {
 				tempTimer = this.panoramaTimer;
-				}
-			//System.out.println(panoramaTimer - tempTimer);
-			//20tick为1s
+			}
+			// System.out.println(panoramaTimer - tempTimer);
+			// 20tick为1s
 			if (tempTimer != -1 && panoramaTimer - tempTimer >= 20 * 4) {
-				//System.out.println("Pre2->1:" + tempTimer + "|" + panoramaTimer);
+				// System.out.println("Pre2->1:" + tempTimer + "|" +
+				// panoramaTimer);
 				error = !error;
 			} else {
 				this.drawString(this.fontRendererObj, errorPassword, this.width / 2 - 48, this.height / 4 + 32, -1);

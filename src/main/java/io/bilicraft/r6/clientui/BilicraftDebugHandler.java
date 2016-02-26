@@ -9,6 +9,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.ActionPerformedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -48,7 +49,7 @@ public class BilicraftDebugHandler {
 		logging.info("Event:" + event.getClass().getTypeName() + "|Phase" + event.getPhase().name() + "|Result"
 				+ event.getResult().name());
 	}
-	
+
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onButtonPress(ActionPerformedEvent event)
 	{
