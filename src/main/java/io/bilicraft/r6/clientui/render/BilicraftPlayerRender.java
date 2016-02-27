@@ -1,6 +1,5 @@
 package io.bilicraft.r6.clientui.render;
 
-import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -8,12 +7,9 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.bilicraft.r6.clientui.GuiHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.ImageBufferDownload;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 
@@ -56,7 +52,7 @@ public class BilicraftPlayerRender {
         if(resourceLocation == null)
         {   //此处为net.minecraft.util下的StringUtils
             resourceLocation = new ResourceLocation("skins/" + StringUtils.stripControlCodes(name));
-            getDownloadImageSkin(resourceLocation, name);
+            GuiHelper.getDownloadImageSkin(resourceLocation, name);
             skinCache.put(name, resourceLocation);
         }
         Minecraft.getMinecraft().renderEngine.bindTexture(resourceLocation);
@@ -136,18 +132,5 @@ public class BilicraftPlayerRender {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glPopMatrix();
         GL11.glDisable(GL11.GL_COLOR_MATERIAL);
-    }
-    public static ThreadDownloadImageData getDownloadImageSkin(ResourceLocation p_110304_0_, String p_110304_1_)
-    {
-        TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-        Object object = texturemanager.getTexture(p_110304_0_);
-
-        if (object == null)
-        {
-            object = new ThreadDownloadImageData((File)null, String.format("http://bbs.bilicraft.io/s/data/skin/%s.png", new Object[] {StringUtils.stripControlCodes(p_110304_1_)}), defaultSteveTexture, new ImageBufferDownload());
-            texturemanager.loadTexture(p_110304_0_, (ITextureObject)object);
-        }
-
-        return (ThreadDownloadImageData)object;
     }
 }
