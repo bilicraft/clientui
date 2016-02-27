@@ -25,8 +25,8 @@ public class GuiHelper {
 		try {
 			File f = new File(image).getAbsoluteFile();
 			return ImageIO.read(f);
-		} catch (IOException exception) {
-
+		} catch (SecurityException | IOException e) {
+			// getAbsoluteFile会抛出SecurityException
 		}
 		return null;
 
@@ -45,8 +45,8 @@ public class GuiHelper {
 		Object object = texturemanager.getTexture(resourceLocation);
 
 		if (object == null) {
-			object = new ThreadDownloadImageData((File) null,
-					String.format(SKINADRESS, new Object[] { StringUtils.stripControlCodes(name) }),
+			object = new ThreadDownloadImageData(null,
+					String.format(SKINADRESS, StringUtils.stripControlCodes(name)),
 					BilicraftPlayerRender.defaultSteveTexture, new ImageBufferDownload());
 			texturemanager.loadTexture(resourceLocation, (ITextureObject) object);
 		}

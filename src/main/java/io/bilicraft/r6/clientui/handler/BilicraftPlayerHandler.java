@@ -20,7 +20,7 @@ public class BilicraftPlayerHandler {
 				"§r§c请输入“/email add <你的邮箱> <再输入一次以确认>”来绑定邮箱§r"), ERROR("§r§c错误的密码§r"), NONE("");
 		private final String message;
 
-		private CmdType(final String message) {
+		CmdType(final String message) {
 			this.message = message;
 		}
 
@@ -31,12 +31,7 @@ public class BilicraftPlayerHandler {
 
 	public static BilicraftPlayerHandler instance = new BilicraftPlayerHandler();
 	public static Logger logging = LogManager.getLogger("PlayerHandler");
-	// private static final String REGISTERCMD = "§r§c请输入“/register <密码>
-	// <再输入一次以确定密码>”以注册，密码最短8位§r";
-	// private static final String LOGINCMD = "§r§c请输入“/login <密码>”以登录§r";
-	// private static final String BINDMAILCMD = "§r§c请输入“/email add <你的邮箱>
-	// <再输入一次以确认>”来绑定邮箱§r";
-	// private static final String ErrorCMD ="§r§c错误的密码§r";
+
 	private boolean passwordError = false;
 
 	@SubscribeEvent
@@ -65,19 +60,19 @@ public class BilicraftPlayerHandler {
 		switch (getCmdType(message)) {
 		case REGISTER:
 			registerUser(getPassword());
-			bilicraft.appendText("§r§c[BilicaftUI]:已成功注册!§r");
+			bilicraft.appendText("§r§c[BilicraftUI]:已成功注册!§r");
 			break;
 		case LOGIN:
 			loginUser(getPassword());
-			bilicraft.appendText("§r§c[BilicaftUI]:已成功登陆!§r");
+			bilicraft.appendText("§r§c[BilicraftUI]:已成功登陆!§r");
 			break;
 		case BINDMAIL:
 			bindMail(getMail());
-			bilicraft.appendText("§r§c[BilicaftUI]:邮箱已绑定成功!§r");
+			bilicraft.appendText("§r§c[BilicraftUI]:邮箱已绑定成功!§r");
 			break;
 		case ERROR:
 			this.passwordError = true;
-			bilicraft.appendText("§r§c[BilicaftUI]:请返回主界面输入正确的密码!!!!!§r");
+			bilicraft.appendText("§r§c[BilicraftUI]:请返回主界面输入正确的密码!!!!!§r");
 			break;
 		case NONE:
 			bilicraft.appendText(event.message.getFormattedText());
@@ -96,7 +91,6 @@ public class BilicraftPlayerHandler {
 		} else if (message.contains(CmdType.BINDMAIL.getMessage())) {
 			return CmdType.BINDMAIL;
 		} else if (message.contains(CmdType.ERROR.getMessage())) {
-
 			return CmdType.ERROR;
 		}
 		return CmdType.NONE;
