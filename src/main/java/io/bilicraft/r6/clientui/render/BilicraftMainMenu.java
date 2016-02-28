@@ -70,6 +70,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
      * 就,显示在Minecraft图标旁边的那一行字
      */
     private String splashText;
+	private GuiButtonExt bilicraftbutton;
     private GuiButton buttonResetDemo;
     /**
      * 主界面背景旋转计时,按每刻(tick)增加
@@ -111,15 +112,18 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
             String s;
             while ((s = bufferedreader.readLine()) != null) {
                 s = s.trim();
-
+                
                 if (!s.isEmpty()) {
                     splashTexts.add(s);
                 }
             }
-
-            while (!splashTexts.isEmpty()) {
-                this.splashText = splashTexts.get(rand.nextInt(splashTexts.size()));
-            }
+            System.out.println("try load splashText ");
+            if (!splashTexts.isEmpty()) {
+				do {
+					this.splashText = (String) splashTexts.get(rand.nextInt(splashTexts.size()));
+				} while (this.splashText.hashCode() == 125780783);
+			}
+            System.out.println("try load splashText load over ");
         } catch (IOException ioexception1) {
 
         } finally {
@@ -182,6 +186,9 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
         if (p_73869_2_ == 15) {
             this.password.setFocused(!this.password.isFocused());
         }
+		if(p_73869_1_ ==13 &&p_73869_2_ ==28) {
+			actionPerformed(bilicraftbutton);
+		}
     }
 
     /**
@@ -265,7 +272,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         GuiButtonExt singleplayer = new GuiButtonExt(1, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2,
                 I18n.format("menu.singleplayer"));
-        GuiButtonExt bilicraftbutton = new GuiButtonExt(22, this.width / 2 - 100, p_73969_1_ + p_73969_2_,
+        bilicraftbutton= new GuiButtonExt(22, this.width / 2 - 100, p_73969_1_ + p_73969_2_,
                 "Enter the Bilicraft");
 
         /**
