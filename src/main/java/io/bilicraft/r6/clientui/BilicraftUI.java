@@ -14,7 +14,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = BilicraftUI.MODID, name = BilicraftUI.MODNAME, version = BilicraftUI.VERSION)
 public class BilicraftUI {
-
     public static final String MODID = "bilicraftui";
     public static final String MODNAME = "Bilicraft UI";
     public static final String VERSION = "v1.0.3";
@@ -48,7 +47,7 @@ public class BilicraftUI {
     @EventHandler
     public void onModPreInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new BilicraftMenuHandler());
-        MinecraftForge.EVENT_BUS.register(new BilicraftPlayerHandler());
+        MinecraftForge.EVENT_BUS.register(BilicraftPlayerHandler.getInstance());
 
         if (isDebug()) {
             MinecraftForge.EVENT_BUS.register(new BilicraftDebugHandler());
