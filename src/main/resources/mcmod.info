@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "clientui",
+  "name": "BilicraftUI",
+  "description": "io.bilicraft.r6.clientui",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "url": "http://bbs.bilicraft.io",
+  "updateUrl": "https://www.github.com/bilicraft/clientui",
+  "authorList": ["HopeASD", "catcarbon"],
+  "credits": "Bilicraft Server Demolition Squad",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
