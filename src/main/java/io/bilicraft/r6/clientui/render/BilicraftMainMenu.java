@@ -247,6 +247,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
             this.field_92020_v = this.field_92022_t + j;
             this.field_92019_w = this.field_92021_u + 24;
         }
+        BilicraftUI.username = this.mc.getSession().getUsername();
     }
 
     private void addTextField(int i) {
@@ -345,7 +346,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
                 error = false;
             }
             if (BilicraftUI.isDebug()) {
-                System.out.println("Email|Pre:" + email + "Password|Pre:" + password);
+                System.out.println("Email|Pre:" + email.getText() + ",Password|Pre:" + password.getPassword());
             }
 
             FMLClientHandler.instance().setupServerList();

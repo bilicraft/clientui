@@ -18,7 +18,6 @@ public class BilicraftMenuHandler {
 	public void onMenuOpen(GuiOpenEvent event) {
 		if (event.gui instanceof GuiMainMenu) {
 			event.gui = new BilicraftMainMenu();
-			
 		}
 		if (event.gui instanceof GuiConnecting) {
 			if (BilicraftUI.isDebug()) {
