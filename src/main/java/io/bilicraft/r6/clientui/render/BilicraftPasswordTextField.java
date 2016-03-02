@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiTextField;
 
 public class BilicraftPasswordTextField extends GuiTextField {
     private static final int MAX_LENGTH = 30;
-    private StringBuilder realPasswordSB = new StringBuilder(MAX_LENGTH);
+    private StringBuilder realPasswordSB;
     private String defaultString;
 
     public BilicraftPasswordTextField(FontRenderer fontRenderer, int xPos, int yPos, int width, int height,
@@ -16,6 +16,7 @@ public class BilicraftPasswordTextField extends GuiTextField {
         super(fontRenderer, xPos, yPos, width, height);
         this.defaultString = defaultString;
         setText(defaultString);
+        realPasswordSB = new StringBuilder(MAX_LENGTH);
     }
 
     @Override
@@ -26,6 +27,7 @@ public class BilicraftPasswordTextField extends GuiTextField {
         }
         boolean result = super.textboxKeyTyped(keyedChar, p_146201_2_);
         if (!isFocused() || realPasswordSB.length() == MAX_LENGTH) {
+            maskGuiText(realPasswordSB.length());
             return result;
         }
 
