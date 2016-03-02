@@ -7,11 +7,8 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
 
 public class BilicraftPasswordTextField extends GuiTextField {
-    /**
-     * 忘了服务器密码允许最长多少了,先放个30在这里 推荐初始化的时候使用getMaxStringLength()
-     */
-    private StringBuilder realPasswordSB = new StringBuilder(30);
-    private String realPassword = "";
+    private static final int MAX_LENGTH = 30;
+    private StringBuilder realPasswordSB = new StringBuilder(MAX_LENGTH);
     private String defaultString;
 
     public BilicraftPasswordTextField(FontRenderer fontRenderer, int xPos, int yPos, int width, int height,
@@ -28,11 +25,11 @@ public class BilicraftPasswordTextField extends GuiTextField {
             System.out.println("textboxKeyTyped: " + (int) keyedChar + ", " + p_146201_2_);
         }
         boolean result = super.textboxKeyTyped(keyedChar, p_146201_2_);
-        if (!isFocused()) {
+        if (!isFocused() || realPasswordSB.length() == MAX_LENGTH) {
             return result;
         }
 
-        if (keyedChar >= 33 && keyedChar <= 126) {
+        if (keyedChar >= 33 && keyedChar <= 126) { // valid range for password chars
             realPasswordSB.append(keyedChar);
         } else if (keyedChar == 8 || keyedChar == 127) { // backspace or del
             if (realPasswordSB.length() > 0)
@@ -42,7 +39,6 @@ public class BilicraftPasswordTextField extends GuiTextField {
         }
 
         maskGuiText(realPasswordSB.length());
-        realPassword = realPasswordSB.toString();
         return result;
     }
 
@@ -55,6 +51,6 @@ public class BilicraftPasswordTextField extends GuiTextField {
     }
 
     public String getPassword() {
-        return realPassword == null ? "" : realPassword;
+        return realPasswordSB.toString();
     }
 }
