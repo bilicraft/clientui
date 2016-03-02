@@ -2,10 +2,10 @@ package io.bilicraft.r6.clientui.render;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import io.bilicraft.r6.clientui.BilicraftUI;
+import io.bilicraft.r6.clientui.BilicraftConfig;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
-
+@SideOnly(Side.CLIENT)
 public class BilicraftPasswordTextField extends GuiTextField {
     private static final int MAX_LENGTH = 30;
     private StringBuilder realPasswordSB;
@@ -22,7 +22,7 @@ public class BilicraftPasswordTextField extends GuiTextField {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean textboxKeyTyped(char keyedChar, int p_146201_2_) {
-        if (BilicraftUI.isDebug()) {
+        if (BilicraftConfig.isDebug()) {
             System.out.println("textboxKeyTyped: " + (int) keyedChar + ", " + p_146201_2_);
         }
         boolean result = super.textboxKeyTyped(keyedChar, p_146201_2_);

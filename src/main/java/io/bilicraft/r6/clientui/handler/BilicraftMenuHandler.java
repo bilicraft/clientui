@@ -4,10 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import io.bilicraft.r6.clientui.BilicraftUI;
+import io.bilicraft.r6.clientui.render.BilicraftInGameMenu;
 import io.bilicraft.r6.clientui.render.BilicraftMainMenu;
+import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraftforge.client.event.GuiOpenEvent;
 
 public class BilicraftMenuHandler {
@@ -19,10 +19,8 @@ public class BilicraftMenuHandler {
 		if (event.gui instanceof GuiMainMenu) {
 			event.gui = new BilicraftMainMenu();
 		}
-		if (event.gui instanceof GuiConnecting) {
-			if (BilicraftUI.isDebug()) {
-				logging.info(BilicraftUI.email + BilicraftUI.password);
-			}
+		if (event.gui instanceof GuiIngameMenu) {
+		    	event.gui = new BilicraftInGameMenu();
 		}
 	}
 }

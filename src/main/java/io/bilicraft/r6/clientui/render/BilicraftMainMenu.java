@@ -8,6 +8,7 @@ import cpw.mods.fml.client.config.GuiButtonExt;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.bilicraft.r6.clientui.BilicraftConfig;
 import io.bilicraft.r6.clientui.BilicraftUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
@@ -117,13 +118,11 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
                     splashTexts.add(s);
                 }
             }
-            System.out.println("try load splashText ");
             if (!splashTexts.isEmpty()) {
 				do {
 					this.splashText = (String) splashTexts.get(rand.nextInt(splashTexts.size()));
 				} while (this.splashText.hashCode() == 125780783);
 			}
-            System.out.println("try load splashText load over ");
         } catch (IOException ioexception1) {
 
         } finally {
@@ -164,7 +163,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
         }
         BilicraftUI.email = this.email.getText();
         //BilicraftUI.password = this.password.getText();
-        BilicraftUI.password = this.password.getPassword();
+        BilicraftConfig.password = this.password.getPassword();
         ++this.panoramaTimer;
     }
 
@@ -289,7 +288,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
         // realmsButton.width = 98;
         fmlModButton.width = 98;
         this.buttonList.add(singleplayer);
-        if (BilicraftUI.isDebug()) {
+        if (BilicraftConfig.isDebug()) {
             GuiButtonExt multibutton = new GuiButtonExt(2, this.width / 2 + 102, p_73969_1_ + p_73969_2_,
                     I18n.format("menu.multiplayer"));
             this.buttonList.add(multibutton);
@@ -336,8 +335,8 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
         }
         if (p_146284_1_.id == 22) {
             BilicraftUI.email = this.email.getText();
-            BilicraftUI.password = this.password.getPassword();
-            if (BilicraftUI.password.length() < 8 || BilicraftUI.password.equals("Password")) {
+            BilicraftConfig.password = this.password.getPassword();
+            if (BilicraftConfig.password.length() < 8 || BilicraftConfig.password.equals("Password")) {
                 error = true;
                 this.password.setFocused(true);
                 // System.out.println(BilicraftUI.password.length());
@@ -345,7 +344,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
             } else {
                 error = false;
             }
-            if (BilicraftUI.isDebug()) {
+            if (BilicraftConfig.isDebug()) {
                 System.out.println("Email|Pre:" + email.getText() + ",Password|Pre:" + password.getPassword());
             }
 
@@ -655,7 +654,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 
     private void renderPlayerModel() {
         bilicraftPlayerRender.setSkin(this.mc.getSession().getUsername());
-        if (BilicraftUI.isDebug()) {
+        if (BilicraftConfig.isDebug()) {
             System.out.println(this.mc.getSession().getUsername());
         }
         bilicraftPlayerRender.setWalk(0.3F);

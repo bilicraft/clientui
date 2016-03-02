@@ -6,6 +6,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+@SideOnly(Side.CLIENT)
 public class BilicraftCustomButton extends GuiButton {
     private ResourceLocation buttonTextures;
     private ResourceLocation buttonTextures_1;

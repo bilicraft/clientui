@@ -17,20 +17,13 @@ public class BilicraftUI {
     public static final String MODID = "bilicraftui";
     public static final String MODNAME = "Bilicraft UI";
     public static final String VERSION = "v1.0.3";
-    private static final boolean Debug = false;
-    public static String username;
-    public static String email;
-    public static String password;
     @Mod.Instance
     public static BilicraftUI instance;
 
     @SidedProxy(clientSide = "io.bilicraft.r6.clientui.proxy.BilicraftClientProxy", serverSide = "io.bilicraft.r6.clientui.proxy.BilicraftCommonProxy", modId = MODID)
     public static BilicraftCommonProxy proxy;
+    
     private static boolean showPlayerModel = false;
-
-    public static boolean isDebug() {
-        return Debug;
-    }
 
     public static boolean isShowPlayer() {
         return showPlayerModel;
@@ -43,12 +36,16 @@ public class BilicraftUI {
         Minecraft.getMinecraft().thePlayer.sendChatMessage(command);
     }
 
+    public static String username;
+    public static String email;
+
     @EventHandler
     public void onModPreInit(FMLPreInitializationEvent event) {
+	proxy.onPreinit(event);
         MinecraftForge.EVENT_BUS.register(new BilicraftMenuHandler());
         MinecraftForge.EVENT_BUS.register(BilicraftPlayerHandler.getInstance());
 
-        if (isDebug()) {
+        if (BilicraftConfig.isDebug()) {
             MinecraftForge.EVENT_BUS.register(new BilicraftDebugHandler());
         }
     }

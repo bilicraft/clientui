@@ -4,6 +4,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.bilicraft.r6.clientui.BilicraftConfig;
 import io.bilicraft.r6.clientui.BilicraftUI;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
@@ -30,9 +31,9 @@ public class BilicraftPlayerHandler {
 			if (player.getDisplayName().equals(BilicraftUI.username)) {
 				status = PlayerStatus.INIT;
 
-				if (BilicraftUI.isDebug()) {
+				if (BilicraftConfig.isDebug()) {
 					logging.info("player: " + player.getDisplayName() + ", email: " + BilicraftUI.email + ", password: "
-							+ BilicraftUI.password);
+							+ BilicraftConfig.password);
 				}
 			}
 		}
@@ -43,7 +44,7 @@ public class BilicraftPlayerHandler {
 		if (status != PlayerStatus.LOGGED_IN) {
 			String message = event.message.getFormattedText();
 			doCmd(message, event);
-			if (BilicraftUI.isDebug())
+			if (BilicraftConfig.isDebug())
 				logging.info(message);
 		}
 	}
@@ -86,7 +87,7 @@ public class BilicraftPlayerHandler {
 			break;
 		case NONE:
 			bilicraft.appendText(event.message.getFormattedText());
-			if (BilicraftUI.isDebug())
+			if (BilicraftConfig.isDebug())
 				logging.info("CMDType:NONE");
 			break;
 		}
@@ -95,37 +96,37 @@ public class BilicraftPlayerHandler {
 
 	private static CmdType getCmdType(String message) {
 		if (message.contains(CmdType.REGISTER.getMessage())) {
-			if (BilicraftUI.isDebug()) {
+			if (BilicraftConfig.isDebug()) {
 				logging.info("reg|" +message);
 			}
 			return CmdType.REGISTER;
 		} else if (message.contains(CmdType.LOGIN_PROMPT.getMessage())) {
-			if (BilicraftUI.isDebug()) {
+			if (BilicraftConfig.isDebug()) {
 				logging.info("l_p|"+message);
 			}
 			return CmdType.LOGIN_PROMPT;
 		} else if (message.contains(CmdType.LOGIN_SUCCESS.getMessage())) {
-			if (BilicraftUI.isDebug()) {
+			if (BilicraftConfig.isDebug()) {
 				logging.info("l_s|"+message);
 			}
 			return CmdType.LOGIN_SUCCESS;
 		} else if (message.contains(CmdType.BINDMAIL.getMessage())) {
-			if (BilicraftUI.isDebug()) {
+			if (BilicraftConfig.isDebug()) {
 				logging.info("b|"+message);
 			}
 			return CmdType.BINDMAIL;
 		} else if (message.contains(CmdType.ERROR.getMessage())) {
-			if (BilicraftUI.isDebug()) {
+			if (BilicraftConfig.isDebug()) {
 				logging.info("e|"+message);
 			}
 			return CmdType.ERROR;
 		} else if (message.length() == 0) {
-			if (BilicraftUI.isDebug()) {
+			if (BilicraftConfig.isDebug()) {
 				logging.info("n");
 			}
 			return CmdType.NONE;
 		} else {
-			if (BilicraftUI.isDebug()) {
+			if (BilicraftConfig.isDebug()) {
 				logging.info("no_match: " + message);
 			}
 			return CmdType.NONE;
@@ -134,27 +135,27 @@ public class BilicraftPlayerHandler {
 
 	private static void registerUser(String password) {
 		String command = "/register " + password + " " + password;
-		if (BilicraftUI.isDebug())
+		if (BilicraftConfig.isDebug())
 			logging.info(command);
 		BilicraftUI.sendCommandExecute(command);
 	}
 
 	private static void loginUser(String password) {
 		String command = "/login " + password;
-		if (BilicraftUI.isDebug())
+		if (BilicraftConfig.isDebug())
 			logging.info(command);
 		BilicraftUI.sendCommandExecute(command);
 	}
 
 	private static void bindMail(String mail) {
 		String command = "/email add " + mail + " " + mail;
-		if (BilicraftUI.isDebug())
+		if (BilicraftConfig.isDebug())
 			logging.info(command);
 		BilicraftUI.sendCommandExecute(command);
 	}
 
 	private static String getPassword() {
-		return BilicraftUI.password;
+		return BilicraftConfig.password;
 	}
 
 	private static String getMail() {
