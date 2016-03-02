@@ -1,6 +1,5 @@
 package io.bilicraft.r6.clientui.render;
 
-import com.google.common.collect.Range;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.bilicraft.r6.clientui.BilicraftUI;
@@ -9,7 +8,7 @@ import net.minecraft.client.gui.GuiTextField;
 
 public class BilicraftPasswordTextField extends GuiTextField {
     /**
-     * 忘了服务器密码允许最长多少了,先放个30在这里
+     * 忘了服务器密码允许最长多少了,先放个30在这里 推荐初始化的时候使用getMaxStringLength()
      */
     private StringBuilder realPasswordSB = new StringBuilder(30);
     private String realPassword = "";

@@ -50,7 +50,8 @@ public class BilicraftPlayerRender {
      * 玩家模型头部横滚角(沿z轴旋转)
      * 负数朝左摆头,正数朝右摆头,单位为角度,一般范围是[-90, 90]
      */
-    private float headRoll = 0f;
+    @SuppressWarnings("unused")
+	private float headRoll = 0f;
 
     /**
      * 玩家模型渲染帧数,一般来说不需要设置

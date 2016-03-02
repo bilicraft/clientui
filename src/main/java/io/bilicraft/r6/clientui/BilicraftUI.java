@@ -18,7 +18,7 @@ public class BilicraftUI {
     public static final String MODNAME = "Bilicraft UI";
     public static final String VERSION = "v1.0.3";
     private static final boolean Debug = false;
-
+    public static String username;
     public static String email;
     public static String password;
     @Mod.Instance
@@ -39,7 +39,6 @@ public class BilicraftUI {
     public static void setPlayerModelState() {
         showPlayerModel = !isShowPlayer();
     }
-
     public static void sendCommandExecute(String command) {
         Minecraft.getMinecraft().thePlayer.sendChatMessage(command);
     }
