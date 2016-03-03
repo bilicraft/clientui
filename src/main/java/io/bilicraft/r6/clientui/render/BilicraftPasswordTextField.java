@@ -17,6 +17,11 @@ public class BilicraftPasswordTextField extends GuiTextField {
         this.defaultString = defaultString;
         setText(defaultString);
         realPasswordSB = new StringBuilder(MAX_LENGTH);
+        if(!BilicraftConfig.password.equals(""))
+        {
+            realPasswordSB.append(BilicraftConfig.password);
+            maskGuiText(realPasswordSB.length());
+        }
     }
 
     @Override

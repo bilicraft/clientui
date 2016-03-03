@@ -9,7 +9,7 @@ import net.minecraftforge.common.config.Configuration;
 public class BilicraftConfig {
     public final static Logger logging = LogManager.getLogger("BilicraftConfig");
     private static boolean Debug = false;
-    public static String password;
+    public static String password ="";
 
 
 
