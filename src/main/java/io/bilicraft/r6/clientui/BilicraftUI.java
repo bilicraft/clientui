@@ -1,9 +1,12 @@
 package io.bilicraft.r6.clientui;
 
+import java.io.File;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import io.bilicraft.r6.clientui.handler.BilicraftDebugHandler;
 import io.bilicraft.r6.clientui.handler.BilicraftMenuHandler;
@@ -14,12 +17,13 @@ import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = BilicraftUI.MODID, name = BilicraftUI.MODNAME, version = BilicraftUI.VERSION)
 public class BilicraftUI {
+    
     public static final String MODID = "bilicraftui";
     public static final String MODNAME = "Bilicraft UI";
     public static final String VERSION = "v1.0.3";
     @Mod.Instance
     public static BilicraftUI instance;
-
+    public static File configFile;
     @SidedProxy(clientSide = "io.bilicraft.r6.clientui.proxy.BilicraftClientProxy", serverSide = "io.bilicraft.r6.clientui.proxy.BilicraftCommonProxy", modId = MODID)
     public static BilicraftCommonProxy proxy;
     
@@ -41,7 +45,9 @@ public class BilicraftUI {
 
     @EventHandler
     public void onModPreInit(FMLPreInitializationEvent event) {
+	
 	proxy.onPreinit(event);
+	configFile = event.getModConfigurationDirectory();
         MinecraftForge.EVENT_BUS.register(new BilicraftMenuHandler());
         MinecraftForge.EVENT_BUS.register(BilicraftPlayerHandler.getInstance());
 
@@ -53,5 +59,11 @@ public class BilicraftUI {
     @EventHandler
     public void onModInit(FMLInitializationEvent event) {
         proxy.oninit(event);
+        
+    }
+    @EventHandler
+    public void onModPostInit(FMLPostInitializationEvent event)
+    {
+	proxy.onPostinit(event);
     }
 }

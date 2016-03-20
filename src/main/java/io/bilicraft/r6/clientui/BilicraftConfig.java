@@ -29,4 +29,8 @@ public class BilicraftConfig {
     public static boolean isDebug() {
 	return Debug;
     }
+    public static void setDebug()
+    {
+	Debug = !Debug;
+    }
 }
