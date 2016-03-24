@@ -39,7 +39,7 @@ public class BilicraftClientProxy extends BilicraftCommonProxy {
 	if (mc.fontRenderer.getUnicodeFlag()) {
 	    mc.fontRenderer.setUnicodeFlag(false);
 	}
-	logging.info("ChangeFont !!!");
+	logging.info("ChangeFontRenderer.");
     }
 
 }

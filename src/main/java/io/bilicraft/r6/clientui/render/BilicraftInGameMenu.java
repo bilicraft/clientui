@@ -44,7 +44,6 @@ public class BilicraftInGameMenu extends GuiScreen{
         {
             ((GuiButton)this.buttonList.get(0)).displayString = I18n.format("menu.disconnect", new Object[0]);
         }
-
         this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 24 + b0, I18n.format("menu.returnToGame", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 72 + b0, 98, 20, I18n.format("menu.options", new Object[0])));
         this.buttonList.add(new GuiButton(12, this.width / 2 + 2, this.height / 4 + 72 + b0, 98, 20, "Mod Options..."));

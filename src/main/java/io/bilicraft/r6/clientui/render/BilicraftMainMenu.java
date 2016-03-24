@@ -97,7 +97,6 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
     private BilicraftPasswordTextField password;
     private boolean error = false;
     private int tempTimer = -1;
-
     public BilicraftMainMenu() {
 	logger.info("init BilicraftMainMenu");
 	this.field_146972_A = field_96138_a;
@@ -178,20 +177,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
      * Fired when a key is typed. This is the equivalent of
      * KeyListener.keyTyped(KeyEvent e).
      */
-    @SuppressWarnings("unchecked")
     protected void keyTyped(char p_73869_1_, int p_73869_2_) {
-
-	if (multibutton != null) {
-	    if (BilicraftConfig.isDebug()) {
-		if (!buttonList.contains(multibutton)) {
-		    this.buttonList.add(multibutton);
-		}
-	    } else {
-		if (buttonList.contains(multibutton)) {
-		    this.buttonList.remove(multibutton);
-		}
-	    }
-	}
 
 	this.password.textboxKeyTyped(p_73869_1_, p_73869_2_);
 	this.email.textboxKeyTyped(p_73869_1_, p_73869_2_);
@@ -308,7 +294,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 	// realmsButton.width = 98;
 	fmlModButton.width = 98;
 	this.buttonList.add(singleplayer);
-	GuiButtonExt multibutton = new GuiButtonExt(2, this.width / 2 + 102, p_73969_1_ + p_73969_2_,
+	multibutton = new GuiButtonExt(2, this.width / 2 + 102, p_73969_1_ + p_73969_2_,
 		I18n.format("menu.multiplayer"));
 	multibutton.width = 60;
 
@@ -367,7 +353,7 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 	    }
 
 	    FMLClientHandler.instance().setupServerList();
-	    FMLClientHandler.instance().connectToServer(this, new ServerData("", "mc.bilicraft.io"));
+	    FMLClientHandler.instance().connectToServer(this, new ServerData("", BilicraftConfig.getServerIp()));
 	}
 
 	if (p_146284_1_.id == 23) {
@@ -586,6 +572,9 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
      * Draws the screen and all the components in it.
      */
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
+	
+	drawMultibutton();
+	
 	GL11.glDisable(GL11.GL_ALPHA_TEST);
 	this.renderSkybox(p_73863_1_, p_73863_2_, p_73863_3_);
 	GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -676,6 +665,21 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 	super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
+    @SuppressWarnings("unchecked")
+    private void drawMultibutton() {
+	if (multibutton != null) {
+	    if (BilicraftConfig.isDebug()) {
+		if (!buttonList.contains(multibutton)) {
+		    this.buttonList.add(multibutton);
+		}
+	    } else {
+		if (buttonList.contains(multibutton)) {
+		    this.buttonList.remove(multibutton);
+		}
+	    }
+	}
+    }
+
     private float walkspeed = 0.0F;
     private boolean flagwalk = false;
 
@@ -683,12 +687,12 @@ public class BilicraftMainMenu extends GuiScreen implements GuiYesNoCallback {
 	bilicraftPlayerRender.setSkin(this.mc.getSession().getUsername());
 	bilicraftPlayerRender.setWalk(walkspeed);
 	if (!flagwalk) {
-	    walkspeed += 0.055F;
+	    walkspeed += 0.05F;
 	    if (walkspeed >= 0.9F) {
 		flagwalk = true;
 	    }
 	} else {
-	    walkspeed -= 0.055F;
+	    walkspeed -= 0.05F;
 	    if (walkspeed <= -0.9F) {
 		flagwalk = false;
 	    }

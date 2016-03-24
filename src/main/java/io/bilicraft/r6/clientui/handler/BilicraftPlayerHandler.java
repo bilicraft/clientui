@@ -14,8 +14,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @SideOnly(Side.CLIENT)
-public class BilicraftPlayerHandler {
-	public final static BilicraftPlayerHandler instance = new BilicraftPlayerHandler();
+public enum BilicraftPlayerHandler {
+	INSTANCE;
 	public final static Logger logging = LogManager.getLogger("PlayerHandler");
 
 	private static PlayerStatus status = PlayerStatus.INIT;
@@ -47,10 +47,6 @@ public class BilicraftPlayerHandler {
 			if (BilicraftConfig.isDebug())
 				logging.info(message);
 		}
-	}
-
-	public static BilicraftPlayerHandler getInstance() {
-		return instance;
 	}
 
 	private static void doCmd(String message, ClientChatReceivedEvent event) {
